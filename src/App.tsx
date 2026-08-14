@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from './lib/supabase';
 import Auth from './components/Auth';
 import { LogOut, Plus, Receipt } from 'lucide-react';
+import type { Session, AuthChangeEvent } from '@supabase/supabase-js';
 
 interface Expense {
   id: string;
@@ -12,7 +13,7 @@ interface Expense {
 }
 
 export default function App() {
-  const [session, setSession] = useState<any>(null);
+  const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [desc, setDesc] = useState('');
@@ -20,14 +21,16 @@ export default function App() {
 
   useEffect(() => {
     // Controlla la sessione attiva
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
+    supabase.auth.getSession().then(({ data }: { data: { session: Session | null } }) => {
+      setSession(data.session);
       setLoading(false);
     });
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event: AuthChangeEvent, session: Session | null) => {
+        setSession(session);
+      }
+    );
 
     return () => subscription.unsubscribe();
   }, []);
