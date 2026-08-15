@@ -1,32 +1,25 @@
-# React + TypeScript + Vite
+# Calcolatrice Spesa Amici
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Un'applicazione moderna (Web & Mobile) pensata per dividere i conti delle serate tra amici (pizze, panini, bevande, coperto) in tempo reale. 
 
-Currently, two official plugins are available:
+Ciascun partecipante può accedere alla stanza dal proprio smartphone, inserire le proprie ordinazioni e specificare eventuali piatti/bevande condivisi al centro: l'app calcola automaticamente e all'istante la quota esatta che ciascuno deve pagare.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Funzionalità Principali
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **Stanze in Tempo Reale (Supabase Realtime):** Creazione stanze con codice condivisibile; ogni aggiunta o modifica si aggiorna all'istante sugli schermi di tutti i commensali.
+* **Divisione Equa e Precisa:** Calcolo distinto tra consumazioni personali e spese condivise (es. patatine fritte, bottiglie di vino).
+* **Gestione Automatica del Coperto:** Ripartizione del coperto per singolo partecipante.
+* **Accesso Rapido e Diretto:** Nessuna registrazione richiesta per gli amici al tavolo, basta inserire il proprio nome.
+* **Architettura Monorepo:** Codice Web (React + Vite) e Mobile (React Native + Expo) organizzati nella stessa repository.
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## 🏗️ Architettura del Progetto
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+```text
+calcolatrice_spesa_amici/
+├── web/                  # Web App (React + Vite + Tailwind CSS + Supabase)
+├── mobile/               # Mobile App (React Native + Expo + iOS Xcode)
+└── README.md
